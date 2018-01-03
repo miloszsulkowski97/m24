@@ -1,3 +1,5 @@
+<?php
+
 class Validate extends ValidateCore {
 
 	public static function isEmail($email)
