@@ -1,8 +1,8 @@
 <?php
 // to AdminProductsController.php right after Hook::exec('actionProductadd')...; line
-$this->webRotateOver();
+Product::webRotateOver();
 
-// to /override/cotrollers/admin/AdminProductsController.php
+// to /override/classes/Product.php
 
 public function webRotateOver()
     {   
