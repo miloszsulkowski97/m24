@@ -1,21 +1,16 @@
 <?php
 // to AdminProductsController.php right after Hook::exec('actionProductadd')...; line
-Product::webRotateOver();
+Product::webRotateOver($id_product_old, $product->id);
 
 // to /override/classes/Product.php
 
-public function webRotateOver()
+public function webRotateOver($id_productold, $id_product)
     {   
-        if (Validate::isLoadedObject($product = new Product((int)Tools::getValue('id_product')))) {
-            $id_product_old = $product->id; }
 
-        $config = Db::getInstance()->getValue('SELECT config_file_url FROM '._DB_PREFIX_.'webrotate360 WHERE id_product=' . $id_product_old);
-        $root = Db::getInstance()->getValue('SELECT root_path FROM '._DB_PREFIX_.'webrotate360 WHERE id_product=' . $id_product_old);
+        $config = Db::getInstance()->getValue('SELECT config_file_url FROM '._DB_PREFIX_.'webrotate360 WHERE id_product=' . (int)$id_productold);
+        $root = Db::getInstance()->getValue('SELECT root_path FROM '._DB_PREFIX_.'webrotate360 WHERE id_product=' . (int)$id_productold);
 
-        $rec_exists = Tools::getValue("rec_exists");
-        $id_product = Db::getInstance()->getValue('SELECT id_product FROM '._DB_PREFIX_.'product ORDER BY id_product DESC');
-
-        Db::getInstance()->insert("webrotate360", array("id_product" => $id_product, "config_file_url" => pSQL($config), "root_path" => pSQL($root)));
+        return Db::getInstance()->insert("webrotate360", array("id_product" => (int)$id_product, "config_file_url" => pSQL($config), "root_path" => pSQL($root)));
     }
 
 
